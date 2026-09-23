@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Cybersecurity Fundamentals Quiz</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<header class="site-header">
+
+    <div class="logo">
+        CyberSafe Academy
+    </div>
+
+    <nav>
+        <a href="{{ url_for('learn') }}">Learn</a>
+        <a href="{{ url_for('missions') }}">Missions</a>
+        <a href="{{ url_for('dashboard') }}">Dashboard</a>
+    </nav>
+
+</header>
+
+
+<main class="quiz-page">
+
+    {% if submitted %}
+
+        <section class="result-card">
+
+            <h1>Quiz Complete</h1>
+
+            <p>
+                You scored
+                <strong>{{ score }}/{{ total_questions }}</strong>
+            </p>
+
+            <p>
+                Security Awareness Score:
+                <strong>{{ "%.0f"|format(percentage) }}%</strong>
+            </p>
+
+            {% if percentage == 100 %}
+                <p>Excellent work. You answered every question correctly.</p>
+
+            {% elif percentage >= 60 %}
+                <p>
+                    Good progress. Review the topics you missed and try again.
+                </p>
+
+            {% else %}
+                <p>
+                    Keep learning. Review the fundamentals and attempt the quiz again.
+                </p>
+            {% endif %}
+
+          <div class="quiz-actions">
+
+    <a href="{{ url_for('category_quiz', category=category) }}"
+       class="btn btn-primary">
+        Try Again
+    </a>
+
+    <a href="{{ url_for('learn') }}"
+       class="btn btn-secondary">
+        Back to Learning
+    </a>
+
+</div>
+
+        </section>
+
+    {% else %}
+
+        <section class="quiz-header">
+
+            <p class="eyebrow">
+                CYBERSAFE ACADEMY
+            </p>
+
+            <h1>{{ quiz_category }}</h1>
+            <p>
+                Test your understanding of {{ quiz_category }}.
+            </p>
+
+        </section>
+
+
+        <form method="POST" class="quiz-form">
+
+            {% for question in questions %}
+
+                <section class="quiz-question">
+
+                    <div class="question-number">
+                        Question {{ loop.index }}
+                    </div>
+
+                    <h2>
+                        {{ question["question_text"] }}
+                    </h2>
+
+
+                    <div class="quiz-options">
+
+                        <label class="quiz-option">
+
+                            <input
+                                type="radio"
+                                name="question_{{ question['id'] }}"
+                                value="A"
+                                required
+                            >
+
+                            <span>
+                                {{ question["option_a"] }}
+                            </span>
+
+                        </label>
+
+
+                        <label class="quiz-option">
+
+                            <input
+                                type="radio"
+                                name="question_{{ question['id'] }}"
+                                value="B"
+                            >
+
+                            <span>
+                                {{ question["option_b"] }}
+                            </span>
+
+                        </label>
+
+
+                        <label class="quiz-option">
+
+                            <input
+                                type="radio"
+                                name="question_{{ question['id'] }}"
+                                value="C"
+                            >
+
+                            <span>
+                                {{ question["option_c"] }}
+                            </span>
+
+                        </label>
+
+
+                        <label class="quiz-option">
+
+                            <input
+                                type="radio"
+                                name="question_{{ question['id'] }}"
+                                value="D"
+                            >
+
+                            <span>
+                                {{ question["option_d"] }}
+                            </span>
+
+                        </label>
+
+                    </div>
+
+                </section>
+
+            {% endfor %}
+
+
+            <button type="submit" class="btn btn-primary quiz-submit">
+                Submit Quiz
+            </button>
+
+        </form>
+
+    {% endif %}
+
+</main>
+
+
+<footer class="site-footer">
+
+    <p>
+        CyberSafe Academy — Learn. Practice. Improve.
+    </p>
+
+</footer>
+
+</body>
+</html>

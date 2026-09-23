@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        {{ simulation.title }} | CyberSafe Academy
+    </title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+
+            background:
+                radial-gradient(
+                    circle at top left,
+                    rgba(0, 229, 255, 0.12),
+                    transparent 35%
+                ),
+                radial-gradient(
+                    circle at bottom right,
+                    rgba(0, 180, 255, 0.08),
+                    transparent 35%
+                ),
+                #071014;
+
+            color: #e8faff;
+            min-height: 100vh;
+        }
+
+
+        .container {
+            width: min(1000px, 92%);
+            margin: auto;
+            padding: 35px 0 70px;
+        }
+
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        .top {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+
+        .badge {
+            display: inline-block;
+
+            padding: 8px 16px;
+
+            border:
+                1px solid
+                rgba(0, 229, 255, 0.35);
+
+            border-radius: 30px;
+
+            color: #00e5ff;
+
+            font-size: 12px;
+
+            letter-spacing: 1.2px;
+
+            background:
+                rgba(0, 229, 255, 0.06);
+
+            margin-bottom: 16px;
+        }
+
+
+        h1 {
+            font-size:
+                clamp(30px, 5vw, 48px);
+
+            margin-bottom: 10px;
+        }
+
+
+        .subtitle {
+            color: #91aab3;
+
+            font-size: 15px;
+
+            line-height: 1.6;
+
+            max-width: 700px;
+
+            margin: auto;
+        }
+
+
+        /* =========================
+           PROGRESS
+        ========================= */
+
+        .progress-box {
+
+            background:
+                rgba(11, 25, 31, 0.92);
+
+            border:
+                1px solid
+                rgba(0, 229, 255, 0.16);
+
+            border-radius: 16px;
+
+            padding: 18px 20px;
+
+            margin-bottom: 25px;
+        }
+
+
+        .progress-top {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            margin-bottom: 10px;
+
+            color: #91aab3;
+
+            font-size: 13px;
+        }
+
+
+        .progress-bar {
+
+            height: 7px;
+
+            background:
+                rgba(255, 255, 255, 0.06);
+
+            border-radius: 10px;
+
+            overflow: hidden;
+        }
+
+
+        .progress-fill {
+
+            width: 100%;
+
+            height: 100%;
+
+            background: #00e5ff;
+
+            border-radius: 10px;
+        }
+
+
+        /* =========================
+           SCAM MESSAGE
+        ========================= */
+
+        .scenario-card {
+
+            background:
+                rgba(11, 25, 31, 0.94);
+
+            border:
+                1px solid
+                rgba(255, 90, 90, 0.22);
+
+            border-radius: 22px;
+
+            padding: 25px;
+
+            margin-bottom: 25px;
+
+            box-shadow:
+                0 20px 60px
+                rgba(0, 0, 0, 0.22);
+        }
+
+
+        .scenario-header {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 15px;
+
+            margin-bottom: 20px;
+        }
+
+
+        .scenario-label {
+
+            color: #00e5ff;
+
+            font-size: 12px;
+
+            font-weight: bold;
+
+            letter-spacing: 1px;
+        }
+
+
+        .warning {
+
+            color: #ff8585;
+
+            border:
+                1px solid
+                rgba(255, 90, 90, 0.3);
+
+            background:
+                rgba(255, 90, 90, 0.08);
+
+            padding: 7px 12px;
+
+            border-radius: 20px;
+
+            font-size: 11px;
+
+            font-weight: bold;
+
+            letter-spacing: 0.5px;
+        }
+
+
+        /* =========================
+           PHONE MESSAGE
+        ========================= */
+
+        .phone {
+
+            max-width: 650px;
+
+            margin: auto;
+
+            background: #0b171c;
+
+            border:
+                1px solid
+                rgba(255, 255, 255, 0.08);
+
+            border-radius: 20px;
+
+            padding: 18px;
+
+        }
+
+
+        .phone-top {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            padding-bottom: 15px;
+
+            border-bottom:
+                1px solid
+                rgba(255, 255, 255, 0.07);
+
+            margin-bottom: 18px;
+        }
+
+
+        .bank-icon {
+
+            width: 42px;
+
+            height: 42px;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background:
+                rgba(0, 229, 255, 0.10);
+
+            border:
+                1px solid
+                rgba(0, 229, 255, 0.2);
+
+            font-size: 20px;
+        }
+
+
+        .sender {
+
+            font-weight: bold;
+
+            margin-bottom: 3px;
+        }
+
+
+        .sender-small {
+
+            color: #718991;
+
+            font-size: 12px;
+        }
+
+
+        .message {
+
+            background:
+                rgba(255, 255, 255, 0.035);
+
+            border-radius: 16px;
+
+            padding: 20px;
+
+            color: #dcecf0;
+
+            line-height: 1.7;
+
+            font-size: 15px;
+
+            border-left:
+                3px solid
+                #ff8585;
+        }
+
+
+        /* =========================
+           QUESTION
+        ========================= */
+
+        .question-card {
+
+            background:
+                rgba(11, 25, 31, 0.94);
+
+            border:
+                1px solid
+                rgba(0, 229, 255, 0.16);
+
+            border-radius: 22px;
+
+            padding: 28px;
+
+            margin-bottom: 20px;
+        }
+
+
+        .question-number {
+
+            color: #00e5ff;
+
+            font-size: 12px;
+
+            font-weight: bold;
+
+            letter-spacing: 1px;
+
+            margin-bottom: 10px;
+        }
+
+
+        .question-text {
+
+            font-size: 20px;
+
+            line-height: 1.5;
+
+            margin-bottom: 22px;
+        }
+
+
+        /* =========================
+           ANSWERS
+        ========================= */
+
+        .answers {
+
+            display: grid;
+
+            gap: 12px;
+        }
+
+
+        .answer-option {
+
+            position: relative;
+        }
+
+
+        .answer-option input {
+
+            position: absolute;
+
+            opacity: 0;
+        }
+
+
+        .answer-label {
+
+            display: block;
+
+            padding: 17px 18px;
+
+            border:
+                1px solid
+                rgba(255, 255, 255, 0.10);
+
+            border-radius: 14px;
+
+            background:
+                rgba(255, 255, 255, 0.025);
+
+            color: #b9cdd2;
+
+            cursor: pointer;
+
+            transition: 0.2s ease;
+
+            line-height: 1.5;
+        }
+
+
+        .answer-label:hover {
+
+            border-color:
+                rgba(0, 229, 255, 0.35);
+
+            background:
+                rgba(0, 229, 255, 0.05);
+
+            transform: translateY(-1px);
+        }
+
+
+        .answer-option input:checked
+        + .answer-label {
+
+            border-color: #00e5ff;
+
+            background:
+                rgba(0, 229, 255, 0.09);
+
+            color: #e8faff;
+
+            box-shadow:
+                0 0 0 1px
+                rgba(0, 229, 255, 0.15);
+        }
+
+
+        /* =========================
+           THINK BOX
+        ========================= */
+
+        .think-box {
+
+            border:
+                1px solid
+                rgba(0, 229, 255, 0.14);
+
+            background:
+                rgba(0, 229, 255, 0.035);
+
+            border-radius: 16px;
+
+            padding: 18px;
+
+            margin-bottom: 25px;
+
+            color: #91aab3;
+
+            line-height: 1.6;
+
+            font-size: 13px;
+        }
+
+
+        .think-box strong {
+
+            color: #00e5ff;
+        }
+
+
+        /* =========================
+           BUTTON
+        ========================= */
+
+        .submit-area {
+
+            text-align: center;
+
+            margin-top: 30px;
+        }
+
+
+        .submit-btn {
+
+            border: none;
+
+            background: #00e5ff;
+
+            color: #041014;
+
+            padding: 15px 30px;
+
+            border-radius: 13px;
+
+            font-size: 15px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.2s ease;
+
+            box-shadow:
+                0 10px 30px
+                rgba(0, 229, 255, 0.12);
+        }
+
+
+        .submit-btn:hover {
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 14px 35px
+                rgba(0, 229, 255, 0.20);
+        }
+
+
+        .safe-note {
+
+            text-align: center;
+
+            color: #718991;
+
+            font-size: 12px;
+
+            margin-top: 22px;
+
+            line-height: 1.6;
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 700px) {
+
+            .container {
+
+                padding-top: 25px;
+            }
+
+
+            .scenario-header {
+
+                align-items: flex-start;
+
+                flex-direction: column;
+            }
+
+
+            .scenario-card,
+            .question-card {
+
+                padding: 20px;
+            }
+
+
+            .question-text {
+
+                font-size: 18px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+    <!-- HEADER -->
+
+    <div class="top">
+
+        <div class="badge">
+            CYBERSAFE ACADEMY • SOCIAL ENGINEERING
+        </div>
+
+        <h1>
+            {{ simulation.title }}
+        </h1>
+
+        <p class="subtitle">
+            Investigate the situation carefully and make
+            the safest cybersecurity decision.
+        </p>
+
+    </div>
+
+
+    <!-- PROGRESS -->
+
+    <div class="progress-box">
+
+        <div class="progress-top">
+
+            <span>
+                Security Awareness Simulation
+            </span>
+
+            <span>
+                {{ questions|length }} Scenarios
+            </span>
+
+        </div>
+
+        <div class="progress-bar">
+
+            <div class="progress-fill"></div>
+
+        </div>
+
+    </div>
+
+
+    <form
+        action="{{ url_for('submit_social_engineering_simulation') }}"
+        method="POST"
+    >
+
+
+        <input
+            type="hidden"
+            name="simulation_id"
+            value="{{ simulation.id }}"
+        >
+
+
+        {% for question in questions %}
+
+
+        <!-- SCENARIO -->
+
+        <div class="scenario-card">
+
+            <div class="scenario-header">
+
+                <div class="scenario-label">
+                    SCENARIO {{ loop.index }}
+                </div>
+
+                <div class="warning">
+                    ⚠ SUSPICIOUS ACTIVITY
+                </div>
+
+            </div>
+
+
+            <!-- PHONE -->
+
+            <div class="phone">
+
+                <div class="phone-top">
+
+                    <div class="bank-icon">
+                        🏦
+                    </div>
+
+                    <div>
+
+                        <div class="sender">
+                            Bank Security Alert
+                        </div>
+
+                        <div class="sender-small">
+                            Incoming message
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="message">
+
+                    {{ question.message_text }}
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- QUESTION -->
+
+        <div class="question-card">
+
+            <div class="question-number">
+                DECISION {{ loop.index }}
+            </div>
+
+
+            <div class="question-text">
+
+                {{ question.question_text }}
+
+            </div>
+
+
+            <div class="answers">
+
+
+                {% if loop.index == 1 %}
+
+                    <div class="answer-option">
+
+                        <input
+                            type="radio"
+                            id="q{{ question.id }}_a"
+                            name="question_{{ question.id }}"
+                            value="do_not_share"
+                            required
+                        >
+
+                        <label
+                            class="answer-label"
+                            for="q{{ question.id }}_a"
+                        >
+                            🛡️ Do not share the OTP
+                        </label>
+
+                    </div>
+
+
+                    <div class="answer-option">
+
+                        <input
+                            type="radio"
+                            id="q{{ question.id }}_b"
+                            name="question_{{ question.id }}"
+                            value="share"
+                        >
+
+                        <label
+                            class="answer-label"
+                            for="q{{ question.id }}_b"
+                        >
+                            Share the OTP as requested
+                        </label>
+
+                    </div>
+
+
+                {% elif loop.index == 2 %}
+
+
+                    <div class="answer-option">
+
+                        <input
+                            type="radio"
+                            id="q{{ question.id }}_a"
+                            name="question_{{ question.id }}"
+                            value="do_not_click"
+                            required
+                        >
+
+                        <label
+                            class="answer-label"
+                            for="q{{ question.id }}_a"
+                        >
+                            🛡️ Do not click the link
+                        </label>
+
+                    </div>
+
+
+                    <div class="answer-option">
+
+                        <input
+                            type="radio"
+                            id="q{{ question.id }}_b"
+                            name="question_{{ question.id }}"
+                            value="click"
+                        >
+
+                        <label
+                            class="answer-label"
+                            for="q{{ question.id }}_b"
+                        >
+                            Click the link immediately
+                        </label>
+
+                    </div>
+
+
+                {% elif loop.index == 3 %}
+
+
+                    <div class="answer-option">
+
+                        <input
+                            type="radio"
+                            id="q{{ question.id }}_a"
+                            name="question_{{ question.id }}"
+                            value="no"
+                            required
+                        >
+
+                        <label
+                            class="answer-label"
+                            for="q{{ question.id }}_a"
+                        >
+                            🛡️ No — this does not prove identity
+                        </label>
+
+                    </div>
+
+
+                    <div class="answer-option">
+
+                        <input
+                            type="radio"
+                            id="q{{ question.id }}_b"
+                            name="question_{{ question.id }}"
+                            value="yes"
+                        >
+
+                        <label
+                            class="answer-label"
+                            for="q{{ question.id }}_b"
+                        >
+                            Yes — the caller must be genuine
+                        </label>
+
+                    </div>
+
+
+                {% elif loop.index == 4 %}
+
+
+                    <div class="answer-option">
+
+                        <input
+                            type="radio"
+                            id="q{{ question.id }}_a"
+                            name="question_{{ question.id }}"
+                            value="end_call"
+                            required
+                        >
+
+                        <label
+                            class="answer-label"
+                            for="q{{ question.id }}_a"
+                        >
+                            🛡️ End the suspicious call
+                        </label>
+
+                    </div>
+
+
+                    <div class="answer-option">
+
+                        <input
+                            type="radio"
+                            id="q{{ question.id }}_b"
+                            name="question_{{ question.id }}"
+                            value="give_otp"
+                        >
+
+                        <label
+                            class="answer-label"
+                            for="q{{ question.id }}_b"
+                        >
+                            Give the OTP to the caller
+                        </label>
+
+                    </div>
+
+
+                {% elif loop.index == 5 %}
+
+
+                    <div class="answer-option">
+
+                        <input
+                            type="radio"
+                            id="q{{ question.id }}_a"
+                            name="question_{{ question.id }}"
+                            value="official_channel"
+                            required
+                        >
+
+                        <label
+                            class="answer-label"
+                            for="q{{ question.id }}_a"
+                        >
+                            🛡️ Verify through an official bank channel
+                        </label>
+
+                    </div>
+
+
+                    <div class="answer-option">
+
+                        <input
+                            type="radio"
+                            id="q{{ question.id }}_b"
+                            name="question_{{ question.id }}"
+                            value="reply"
+                        >
+
+                        <label
+                            class="answer-label"
+                            for="q{{ question.id }}_b"
+                        >
+                            Reply directly to the suspicious message
+                        </label>
+
+                    </div>
+
+                {% endif %}
+
+
+            </div>
+
+        </div>
+
+
+        {% endfor %}
+
+
+        <!-- THINK BOX -->
+
+        <div class="think-box">
+
+            <strong>🧠 Think before you decide</strong>
+
+            <br>
+
+            Look for urgency, unexpected requests,
+            suspicious links, requests for OTPs,
+            and attempts to pressure you into acting quickly.
+
+        </div>
+
+
+        <!-- SUBMIT -->
+
+        <div class="submit-area">
+
+            <button
+                type="submit"
+                class="submit-btn"
+            >
+                Submit Security Decisions →
+            </button>
+
+        </div>
+
+
+    </form>
+
+
+    <p class="safe-note">
+
+        This is a fictional cybersecurity awareness simulation.
+        Never enter or share a real OTP, password, banking PIN,
+        or other sensitive information.
+
+    </p>
+
+
+</div>
+
+
+</body>
+
+</html>

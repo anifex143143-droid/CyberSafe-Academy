@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{{ mission["title"] }} | CyberSafe Academy</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<header>
+    <div class="logo">🛡️ CyberSafe Academy</div>
+
+    <nav>
+        <a href="/">Home</a>
+        <a href="/missions">Missions</a>
+        <a href="/dashboard">Dashboard</a>
+    </nav>
+</header>
+
+<main class="hero">
+
+    <p class="eyebrow">
+        {{ mission["category"] }} · {{ mission["difficulty"] }}
+    </p>
+
+    <h1>{{ mission["title"] }}</h1>
+
+    <p>{{ mission["description"] }}</p>
+
+    {% if questions %}
+
+        {% for item in questions %}
+
+            <div class="feature-card">
+
+                <h2>
+                    Question {{ loop.index }}
+                </h2>
+
+                <h3>
+                    {{ item["question"]["question_text"] }}
+                </h3>
+
+            </div>
+
+            <div class="feature-grid">
+
+                {% for option in item["options"] %}
+
+                    <div class="feature-card">
+
+                        <h3>
+                            Option {{ loop.index }}
+                        </h3>
+
+                        <p>
+                            {{ option["option_text"] }}
+                        </p>
+
+                        <form method="POST"
+                              action="/mission/{{ mission['id'] }}/submit">
+
+                            <input type="hidden"
+                                   name="option_id"
+                                   value="{{ option['id'] }}">
+
+                            <button type="submit">
+                                Choose Option {{ loop.index }}
+                            </button>
+
+                        </form>
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+        {% endfor %}
+
+    {% else %}
+
+        <div class="feature-card">
+
+            <h2>🛡️ Mission Preparation</h2>
+
+            <p>
+                Questions for this mission are currently being prepared.
+            </p>
+
+        </div>
+
+    {% endif %}
+
+</main>
+
+</body>
+</html>

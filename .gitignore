@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual environments
+venv/
+.venv/
+env/
+ENV/
+
+# Flask / local environment
+.env
+*.env
+
+# SQLite database
+*.db
+*.sqlite
+*.sqlite3
+
+# Machine learning generated files
+*.pkl
+*.joblib
+
+# IDE / editor
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db

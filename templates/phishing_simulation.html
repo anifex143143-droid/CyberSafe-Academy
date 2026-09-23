@@ -1,0 +1,974 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{{ simulation.title }} | CyberSafe Academy</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+    <style>
+
+        /* ================================
+           PHISHING INVESTIGATION UI
+        ================================= */
+
+        .phishing-page {
+            min-height: 100vh;
+            padding: 40px 20px 70px;
+        }
+
+        .phishing-wrapper {
+            max-width: 1050px;
+            margin: 0 auto;
+        }
+
+        /* HEADER */
+
+        .investigation-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .back-link {
+            color: #8eeeff;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .simulation-badge {
+            padding: 8px 14px;
+            border: 1px solid rgba(0, 220, 255, 0.35);
+            border-radius: 20px;
+            color: #8eeeff;
+            background: rgba(0, 220, 255, 0.08);
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .hero-section {
+            margin-bottom: 28px;
+        }
+
+        .hero-section .eyebrow {
+            color: #58e6ff;
+            font-size: 12px;
+            letter-spacing: 2px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .hero-section h1 {
+            margin: 0;
+            font-size: clamp(30px, 5vw, 48px);
+            line-height: 1.1;
+        }
+
+        .hero-section p {
+            max-width: 720px;
+            margin-top: 14px;
+            color: #aebbc5;
+            line-height: 1.7;
+        }
+
+
+        /* ALERT */
+
+        .warning-banner {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 17px 20px;
+            margin-bottom: 25px;
+
+            border: 1px solid rgba(255, 170, 0, 0.35);
+            border-radius: 14px;
+
+            background: rgba(255, 170, 0, 0.07);
+        }
+
+        .warning-icon {
+            font-size: 25px;
+        }
+
+        .warning-banner strong {
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .warning-banner span {
+            color: #aebbc5;
+            font-size: 14px;
+        }
+
+
+        /* EMAIL */
+
+        .email-card {
+            overflow: hidden;
+            margin-bottom: 30px;
+
+            border: 1px solid rgba(0, 220, 255, 0.2);
+            border-radius: 18px;
+
+            background: rgba(12, 21, 29, 0.95);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+        }
+
+        .email-header {
+            padding: 20px 24px;
+
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
+            background: rgba(255, 255, 255, 0.025);
+        }
+
+        .email-app-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            margin-bottom: 20px;
+
+            color: #d9faff;
+            font-weight: 700;
+        }
+
+        .mail-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #58e6ff;
+            box-shadow: 0 0 12px rgba(88, 230, 255, 0.8);
+        }
+
+        .email-meta {
+            display: grid;
+            grid-template-columns: 100px 1fr;
+            gap: 12px 18px;
+        }
+
+        .meta-label {
+            color: #71818c;
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+
+        .meta-value {
+            color: #e7f6fa;
+            word-break: break-word;
+        }
+
+        .sender-warning {
+            color: #ffb84d;
+        }
+
+        .email-body {
+            padding: 30px 28px;
+            color: #d5e1e6;
+            line-height: 1.8;
+            font-size: 15px;
+        }
+
+        .email-body p {
+            margin: 0 0 13px;
+        }
+
+        .fake-link {
+            display: inline-block;
+            margin-top: 8px;
+            padding: 10px 15px;
+
+            border-radius: 8px;
+
+            color: #8eeeff;
+            background: rgba(0, 220, 255, 0.08);
+
+            font-weight: 700;
+        }
+
+
+        /* INVESTIGATION */
+
+        .investigation-card {
+            padding: 30px;
+
+            border: 1px solid rgba(0, 220, 255, 0.18);
+            border-radius: 18px;
+
+            background: rgba(12, 21, 29, 0.92);
+        }
+
+        .investigation-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 8px;
+        }
+
+        .investigation-title h2 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .progress-text {
+            color: #6fdff2;
+            font-size: 13px;
+        }
+
+        .investigation-description {
+            color: #8f9da6;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+
+        /* QUESTIONS */
+
+        .clue {
+            margin-bottom: 22px;
+            padding: 24px;
+
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 15px;
+
+            background: rgba(255, 255, 255, 0.025);
+        }
+
+        .question-number {
+            color: #58e6ff;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 9px;
+        }
+
+        .clue h3 {
+            margin: 0 0 15px;
+            font-size: 17px;
+            line-height: 1.5;
+        }
+
+        .evidence-box {
+            padding: 14px 16px;
+            margin-bottom: 18px;
+
+            border-left: 3px solid #58e6ff;
+            border-radius: 8px;
+
+            background: rgba(0, 220, 255, 0.05);
+        }
+
+        .evidence-label {
+            display: block;
+            color: #71818c;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .evidence-text {
+            color: #dcebf0;
+            line-height: 1.5;
+        }
+
+
+        /* ANSWERS */
+
+        .answer-buttons {
+            display: grid;
+            gap: 10px;
+        }
+
+        .answer-buttons label {
+            display: block;
+            cursor: pointer;
+        }
+
+        .answer-buttons input {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .answer-option {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+
+            padding: 15px 16px;
+
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 11px;
+
+            background: rgba(255, 255, 255, 0.025);
+
+            color: #cbd8dd;
+            line-height: 1.5;
+
+            transition: 0.2s ease;
+        }
+
+        .answer-option:hover {
+            border-color: rgba(88, 230, 255, 0.5);
+            background: rgba(88, 230, 255, 0.06);
+            transform: translateY(-1px);
+        }
+
+        .answer-dot {
+            width: 18px;
+            height: 18px;
+            min-width: 18px;
+
+            margin-top: 2px;
+
+            border: 2px solid #62747e;
+            border-radius: 50%;
+        }
+
+        .answer-buttons input:checked + .answer-option {
+            border-color: #58e6ff;
+            background: rgba(88, 230, 255, 0.1);
+            color: #effcff;
+            box-shadow: 0 0 0 1px rgba(88, 230, 255, 0.15);
+        }
+
+        .answer-buttons input:checked + .answer-option .answer-dot {
+            border-color: #58e6ff;
+            background: #58e6ff;
+            box-shadow: inset 0 0 0 4px #0c151d;
+        }
+
+
+        /* SUBMIT */
+
+        .submit-area {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .analyze-button {
+            width: 100%;
+            max-width: 420px;
+
+            padding: 16px 25px;
+
+            border: none;
+            border-radius: 12px;
+
+            background: linear-gradient(
+                135deg,
+                #18c9ed,
+                #007f9d
+            );
+
+            color: white;
+            font-size: 16px;
+            font-weight: 800;
+
+            cursor: pointer;
+
+            box-shadow: 0 12px 30px rgba(0, 180, 220, 0.2);
+
+            transition: 0.2s ease;
+        }
+
+        .analyze-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 16px 35px rgba(0, 180, 220, 0.3);
+        }
+
+        .submit-note {
+            margin-top: 12px;
+            color: #687780;
+            font-size: 12px;
+        }
+
+
+        /* MOBILE */
+
+        @media (max-width: 700px) {
+
+            .phishing-page {
+                padding: 25px 13px 50px;
+            }
+
+            .investigation-top {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .email-meta {
+                grid-template-columns: 1fr;
+                gap: 5px;
+            }
+
+            .email-meta .meta-label:not(:first-child) {
+                margin-top: 10px;
+            }
+
+            .email-body {
+                padding: 22px 20px;
+            }
+
+            .investigation-card {
+                padding: 20px 15px;
+            }
+
+            .clue {
+                padding: 18px 15px;
+            }
+
+            .investigation-title {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+<div class="phishing-page">
+
+    <div class="phishing-wrapper">
+
+
+        <!-- TOP BAR -->
+
+        <div class="investigation-top">
+
+            <a href="{{ url_for('missions') }}"
+               class="back-link">
+                ← Back to Mission Center
+            </a>
+
+            <div class="simulation-badge">
+                🎯 SECURITY SIMULATION
+            </div>
+
+        </div>
+
+
+        <!-- HERO -->
+
+        <div class="hero-section">
+
+            <div class="eyebrow">
+                PHISHING AWARENESS • BEGINNER
+            </div>
+
+            <h1>
+                🎣 Phishing Investigation
+            </h1>
+
+            <p>
+                A suspicious message has been reported.
+                Investigate the evidence carefully and determine
+                the safest response before taking action.
+            </p>
+
+        </div>
+
+
+        <!-- WARNING -->
+
+        <div class="warning-banner">
+
+            <div class="warning-icon">
+                ⚠️
+            </div>
+
+            <div>
+                <strong>Investigation Mode Active</strong>
+
+                <span>
+                    Don't trust the message automatically.
+                    Examine the sender, urgency, links and
+                    credential requests before deciding.
+                </span>
+            </div>
+
+        </div>
+
+
+        <!-- EMAIL -->
+
+        <div class="email-card">
+
+            <div class="email-header">
+
+                <div class="email-app-title">
+                    <div class="mail-dot"></div>
+                    Email Investigation
+                </div>
+
+
+                <div class="email-meta">
+
+                    <div class="meta-label">
+                        From
+                    </div>
+
+                    <div class="meta-value sender-warning">
+                        {{ simulation.sender }}
+                    </div>
+
+
+                    <div class="meta-label">
+                        Subject
+                    </div>
+
+                    <div class="meta-value">
+                        {{ simulation.subject }}
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="email-body">
+
+                {% for paragraph in simulation.body.split('\n') %}
+
+                    {% if paragraph.strip() %}
+
+                        {% if 'VERIFY MY ACCOUNT' in paragraph %}
+
+                            <div class="fake-link">
+                                🔗 [ VERIFY MY ACCOUNT ]
+                            </div>
+
+                        {% else %}
+
+                            <p>{{ paragraph }}</p>
+
+                        {% endif %}
+
+                    {% else %}
+
+                        <br>
+
+                    {% endif %}
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+
+        <!-- INVESTIGATION -->
+
+        <form method="POST"
+              action="{{ url_for('submit_phishing_simulation') }}">
+
+            <input type="hidden"
+                   name="simulation_id"
+                   value="{{ simulation.id }}">
+
+
+            <div class="investigation-card">
+
+
+                <div class="investigation-title">
+
+                    <h2>
+                        🔎 Analyze the Evidence
+                    </h2>
+
+                    <div class="progress-text">
+                        5 evidence checks
+                    </div>
+
+                </div>
+
+
+                <p class="investigation-description">
+                    Analyze each clue carefully and choose the
+                    response that best matches the situation.
+                    Your answers will determine your investigation score.
+                </p>
+
+
+                {% for clue in clues %}
+
+                <div class="clue">
+
+
+                    <div class="question-number">
+                        Evidence Check {{ loop.index }} / 5
+                    </div>
+
+
+                    <h3>
+                        {{ clue.question_text }}
+                    </h3>
+
+
+                    <div class="evidence-box">
+
+                        <span class="evidence-label">
+                            Evidence
+                        </span>
+
+                        <div class="evidence-text">
+                            {{ clue.clue_text }}
+                        </div>
+
+                    </div>
+
+
+                    <div class="answer-buttons">
+
+
+                        {% if loop.index == 1 %}
+
+                        <!-- QUESTION 1 -->
+
+                        <label>
+
+                            <input
+                                type="radio"
+                                name="clue_{{ clue.id }}"
+                                value="suspicious"
+                                required
+                            >
+
+                            <div class="answer-option">
+                                <div class="answer-dot"></div>
+
+                                <div>
+                                    ⚠️ Suspicious — the sender address looks fake
+                                </div>
+                            </div>
+
+                        </label>
+
+
+                        <label>
+
+                            <input
+                                type="radio"
+                                name="clue_{{ clue.id }}"
+                                value="legitimate"
+                            >
+
+                            <div class="answer-option">
+                                <div class="answer-dot"></div>
+
+                                <div>
+                                    ✓ Legitimate — the sender looks trustworthy
+                                </div>
+                            </div>
+
+                        </label>
+
+
+                        {% elif loop.index == 2 %}
+
+                        <!-- QUESTION 2 -->
+
+                        <label>
+
+                            <input
+                                type="radio"
+                                name="clue_{{ clue.id }}"
+                                value="urgency"
+                                required
+                            >
+
+                            <div class="answer-option">
+                                <div class="answer-dot"></div>
+
+                                <div>
+                                    🚨 Urgency and fear — it pressures you to act immediately
+                                </div>
+                            </div>
+
+                        </label>
+
+
+                        <label>
+
+                            <input
+                                type="radio"
+                                name="clue_{{ clue.id }}"
+                                value="reward"
+                            >
+
+                            <div class="answer-option">
+                                <div class="answer-dot"></div>
+
+                                <div>
+                                    🎁 Reward — it is offering a benefit
+                                </div>
+                            </div>
+
+                        </label>
+
+
+                        <label>
+
+                            <input
+                                type="radio"
+                                name="clue_{{ clue.id }}"
+                                value="normal"
+                            >
+
+                            <div class="answer-option">
+                                <div class="answer-dot"></div>
+
+                                <div>
+                                    ✓ Normal communication — nothing unusual
+                                </div>
+                            </div>
+
+                        </label>
+
+
+                        {% elif loop.index == 3 %}
+
+                        <!-- QUESTION 3 -->
+
+                        <label>
+
+                            <input
+                                type="radio"
+                                name="clue_{{ clue.id }}"
+                                value="click"
+                                required
+                            >
+
+                            <div class="answer-option">
+                                <div class="answer-dot"></div>
+
+                                <div>
+                                    ❌ Click the verification link immediately
+                                </div>
+                            </div>
+
+                        </label>
+
+
+                        <label>
+
+                            <input
+                                type="radio"
+                                name="clue_{{ clue.id }}"
+                                value="verify"
+                            >
+
+                            <div class="answer-option">
+                                <div class="answer-dot"></div>
+
+                                <div>
+                                    🔎 Verify through the organization's official website
+                                </div>
+                            </div>
+
+                        </label>
+
+
+                        <label>
+
+                            <input
+                                type="radio"
+                                name="clue_{{ clue.id }}"
+                                value="reply"
+                            >
+
+                            <div class="answer-option">
+                                <div class="answer-dot"></div>
+
+                                <div>
+                                    💬 Reply to the email and ask if the link is safe
+                                </div>
+                            </div>
+
+                        </label>
+
+
+                        {% elif loop.index == 4 %}
+
+                        <!-- QUESTION 4 -->
+
+                        <label>
+
+                            <input
+                                type="radio"
+                                name="clue_{{ clue.id }}"
+                                value="enter_password"
+                                required
+                            >
+
+                            <div class="answer-option">
+                                <div class="answer-dot"></div>
+
+                                <div>
+                                    🔑 Enter your password to complete verification
+                                </div>
+                            </div>
+
+                        </label>
+
+
+                        <label>
+
+                            <input
+                                type="radio"
+                                name="clue_{{ clue.id }}"
+                                value="report"
+                            >
+
+                            <div class="answer-option">
+                                <div class="answer-dot"></div>
+
+                                <div>
+                                    🛡️ Do not provide the password and report the message
+                                </div>
+                            </div>
+
+                        </label>
+
+
+                        <label>
+
+                            <input
+                                type="radio"
+                                name="clue_{{ clue.id }}"
+                                value="reply_password"
+                            >
+
+                            <div class="answer-option">
+                                <div class="answer-dot"></div>
+
+                                <div>
+                                    💬 Reply with your password instead of using the link
+                                </div>
+                            </div>
+
+                        </label>
+
+
+                        {% elif loop.index == 5 %}
+
+                        <!-- QUESTION 5 -->
+
+                        <label>
+
+                            <input
+                                type="radio"
+                                name="clue_{{ clue.id }}"
+                                value="click"
+                                required
+                            >
+
+                            <div class="answer-option">
+                                <div class="answer-dot"></div>
+
+                                <div>
+                                    ❌ Click the link immediately before the account is suspended
+                                </div>
+                            </div>
+
+                        </label>
+
+
+                        <label>
+
+                            <input
+                                type="radio"
+                                name="clue_{{ clue.id }}"
+                                value="reply"
+                            >
+
+                            <div class="answer-option">
+                                <div class="answer-dot"></div>
+
+                                <div>
+                                    💬 Reply to the sender and ask for confirmation
+                                </div>
+                            </div>
+
+                        </label>
+
+
+                        <label>
+
+                            <input
+                                type="radio"
+                                name="clue_{{ clue.id }}"
+                                value="verify"
+                            >
+
+                            <div class="answer-option">
+                                <div class="answer-dot"></div>
+
+                                <div>
+                                    🛡️ Report the email and verify through the official website
+                                </div>
+                            </div>
+
+                        </label>
+
+
+                        {% endif %}
+
+
+                    </div>
+
+                </div>
+
+                {% endfor %}
+
+
+                <!-- SUBMIT -->
+
+                <div class="submit-area">
+
+                    <button
+                        type="submit"
+                        class="analyze-button"
+                    >
+                        🔍 Analyze Email & Submit Investigation
+                    </button>
+
+                    <div class="submit-note">
+                        Review all five evidence checks before submitting.
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </form>
+
+
+    </div>
+
+</div>
+
+</body>
+</html>
+

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mission Center | CyberSafe Academy</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<header>
+    <div class="logo">🛡️ CyberSafe Academy</div>
+
+    <nav>
+        <a href="/">Home</a>
+        <a href="/missions">Missions</a>
+    </nav>
+</header>
+
+
+<main class="hero">
+
+    <p class="eyebrow">MISSION CENTER</p>
+
+    <h1>Choose Your Mission</h1>
+
+    <p>
+        Investigate cybersecurity situations,
+        make decisions, and improve your security skills.
+    </p>
+
+
+    <!-- SECURITY MISSIONS -->
+
+    <h2 class="section-title">🎯 SECURITY MISSIONS</h2>
+
+    <div class="feature-grid">
+
+        {% for mission in missions %}
+
+        <div class="feature-card">
+
+            <p>{{ mission["category"] }}</p>
+
+            <h2>{{ mission["title"] }}</h2>
+
+            <p>{{ mission["description"] }}</p>
+
+            <p>
+                <strong>Difficulty:</strong>
+                {{ mission["difficulty"] }}
+            </p>
+
+            <p>
+                <strong>Reward:</strong>
+                +{{ mission["xp_reward"] }} XP
+            </p>
+
+            <a href="/mission/{{ mission['id'] }}">
+                <button>START MISSION →</button>
+            </a>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+
+    <!-- SECURITY SIMULATIONS -->
+
+    <h2 class="section-title">🧪 SECURITY SIMULATIONS</h2>
+
+    <div class="feature-grid">
+
+
+        <!-- PHISHING INVESTIGATION -->
+
+        <div class="feature-card">
+
+            <p>PHISHING AWARENESS</p>
+
+            <h2>🎣 Phishing Investigation</h2>
+
+            <p>
+                Analyze a suspicious email and identify
+                the warning signs of a phishing attack.
+            </p>
+
+            <p>
+                <strong>Difficulty:</strong>
+                Beginner
+            </p>
+
+            <p>
+                <strong>Reward:</strong>
+                +100 XP
+            </p>
+
+            <a href="{{ url_for('phishing_simulation') }}">
+                <button>START INVESTIGATION →</button>
+            </a>
+
+        </div>
+
+
+        <!-- MALWARE INVESTIGATION -->
+
+        <div class="feature-card">
+
+            <p>MALWARE AWARENESS</p>
+
+            <h2>🦠 Malware Investigation</h2>
+
+            <p>
+                Investigate a suspicious downloaded file and identify
+                the warning signs of possible malware.
+            </p>
+
+            <p>
+                <strong>Difficulty:</strong>
+                Intermediate
+            </p>
+
+            <p>
+                <strong>Reward:</strong>
+                +150 XP
+            </p>
+
+            <a href="{{ url_for('malware_simulation') }}">
+                <button>START INVESTIGATION →</button>
+            </a>
+
+        </div>
+
+
+        <!-- SOCIAL ENGINEERING / OTP SCAM -->
+
+        <div class="feature-card">
+
+            <p>SOCIAL ENGINEERING</p>
+
+            <h2>📱 Fake Bank OTP Scam</h2>
+
+            <p>
+                Investigate a suspicious bank message and identify
+                the warning signs of an OTP scam and social engineering.
+            </p>
+
+            <p>
+                <strong>Difficulty:</strong>
+                Intermediate
+            </p>
+
+            <p>
+                <strong>Reward:</strong>
+                +150 XP
+            </p>
+
+            <a href="{{ url_for('social_engineering_simulation') }}">
+                <button>START SIMULATION →</button>
+            </a>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+</body>
+</html>

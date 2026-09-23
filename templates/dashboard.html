@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard | CyberSafe Academy</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">
+        🛡️ CyberSafe Academy
+    </div>
+
+    <nav>
+        <a href="/">Home</a>
+        <a href="/missions">Missions</a>
+        <a href="/dashboard">Progress</a>
+    </nav>
+
+</header>
+
+
+<main class="hero">
+
+    <p class="eyebrow">
+        SECURITY DASHBOARD
+    </p>
+
+    <h1>
+        Your Cyber Journey
+    </h1>
+
+    <p>
+        Track your cybersecurity progress, mission performance,
+        experience and security awareness.
+    </p>
+
+<!-- =========================
+     PLAYER OVERVIEW
+========================== -->
+
+<section class="stats">
+
+    <div class="card">
+
+        <h3>
+            ⚡ Total XP
+        </h3>
+
+        <p>
+            {{ user["xp"] }}
+        </p>
+
+        <small>
+            Experience earned
+        </small>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>
+            🏆 Level
+        </h3>
+
+        <p>
+            {{ user["level"] }}
+        </p>
+
+        <small>
+            Current security level
+        </small>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>
+            🛡️ Security Score
+        </h3>
+
+        <p>
+            {{ user["security_score"] }}%
+        </p>
+
+        <progress
+            value="{{ user['security_score'] }}"
+            max="100">
+        </progress>
+
+        <small>
+            Overall security performance
+        </small>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>
+            🎯 Missions
+        </h3>
+
+        <p>
+            {{ completed_missions }} / {{ total_missions }}
+        </p>
+
+        <progress
+            value="{{ completed_missions }}"
+            max="{{ total_missions }}">
+        </progress>
+
+        <small>
+            Missions completed
+        </small>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     SECURITY ANALYTICS
+========================== -->
+
+<section class="features">
+
+    <h2>
+        📊 Security Analytics
+    </h2>
+
+    <p>
+        Your cybersecurity learning and performance overview.
+    </p>
+
+    <div class="feature-grid">
+
+        <div class="feature-card">
+
+            <div class="icon">
+                🎯
+            </div>
+
+            <h3>
+                Quiz Accuracy
+            </h3>
+
+            <p>
+                <strong>
+                    {{ analytics["quiz_accuracy"] }}%
+                </strong>
+            </p>
+
+            <progress
+                value="{{ analytics['quiz_accuracy'] }}"
+                max="100">
+            </progress>
+
+            <p>
+                Overall quiz performance.
+            </p>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <div class="icon">
+                📝
+            </div>
+
+            <h3>
+                Questions Attempted
+            </h3>
+
+            <p>
+                <strong>
+                    {{ analytics["total_questions"] }}
+                </strong>
+            </p>
+
+            <p>
+                Total questions answered.
+            </p>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <div class="icon">
+                ✅
+            </div>
+
+            <h3>
+                Correct Answers
+            </h3>
+
+            <p>
+                <strong>
+                    {{ analytics["correct_answers"] }}
+                </strong>
+            </p>
+
+            <progress
+                value="{{ analytics['correct_answers'] }}"
+                max="{{ analytics['total_questions'] }}">
+            </progress>
+
+            <p>
+                Correct responses recorded.
+            </p>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <div class="icon">
+                📚
+            </div>
+
+            <h3>
+                Learning Progress
+            </h3>
+
+            <p>
+                <strong>
+                    {{ analytics["learning_percentage"] }}%
+                </strong>
+            </p>
+
+            <progress
+                value="{{ analytics['learning_percentage'] }}"
+                max="100">
+            </progress>
+
+            <p>
+                Overall learning completion.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =========================
+     MISSION PERFORMANCE
+========================== -->
+
+<section class="features">
+
+    <h2>
+        🎯 Mission Performance
+    </h2>
+
+    <p>
+        Your performance across cybersecurity missions.
+    </p>
+
+    <div class="feature-grid">
+
+        <div class="feature-card">
+
+            <div class="icon">
+                🏆
+            </div>
+
+            <h3>
+                Missions Completed
+            </h3>
+
+            <p>
+                <strong>
+                    {{ completed_missions }}
+                </strong>
+                /
+                <strong>
+                    {{ total_missions }}
+                </strong>
+            </p>
+
+            <progress
+                value="{{ completed_missions }}"
+                max="{{ total_missions }}">
+            </progress>
+
+            <p>
+                Missions successfully completed.
+            </p>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <div class="icon">
+                📈
+            </div>
+
+            <h3>
+                Practical Security Accuracy
+            </h3>
+
+            <p>
+                <strong>
+                    {{ analytics["mission_accuracy"] }}%
+                </strong>
+            </p>
+
+            <progress
+                value="{{ analytics['mission_accuracy'] }}"
+                max="100">
+            </progress>
+
+            <p>
+                Average mission score.
+            </p>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <div class="icon">
+                ⭐
+            </div>
+
+            <h3>
+                Total XP
+            </h3>
+
+            <p>
+                <strong>
+                    {{ user["xp"] }}
+                </strong>
+                XP
+            </p>
+
+            <p>
+                Experience earned from your progress.
+            </p>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <div class="icon">
+                🛡️
+            </div>
+
+            <h3>
+                Security Score
+            </h3>
+
+            <p>
+                <strong>
+                    {{ user["security_score"] }}%
+                </strong>
+            </p>
+
+            <progress
+                value="{{ user['security_score'] }}"
+                max="100">
+            </progress>
+
+            <p>
+                Current security awareness score.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =========================
+     CATEGORY PERFORMANCE
+========================== -->
+
+<section class="features">
+
+    <h2>
+        📚 Category Performance
+    </h2>
+
+    <p>
+        See how you are performing in each cybersecurity topic.
+    </p>
+
+    {% if category_performance %}
+
+        <div class="feature-grid">
+
+            {% for category in category_performance %}
+
+                <div class="feature-card">
+
+                    <div class="icon">
+                        🔐
+                    </div>
+
+                    <h3>
+                        {{ category["category"] }}
+                    </h3>
+
+                    <p>
+                        Quiz Score:
+                        <strong>
+                            {{ "%.0f"|format(category["score"]) }}%
+                        </strong>
+                    </p>
+
+                    <progress
+                        value="{{ category['score'] }}"
+                        max="100">
+                    </progress>
+
+                    {% if category["completed"] == 1 %}
+
+                        <p>
+                            ✅ Completed
+                        </p>
+
+                    {% else %}
+
+                        <p>
+                            ⏳ In Progress
+                        </p>
+
+                    {% endif %}
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    {% else %}
+
+        <div class="feature-card">
+
+            <div class="icon">
+                📖
+            </div>
+
+            <h3>
+                No Category Data Yet
+            </h3>
+
+            <p>
+                Complete cybersecurity quizzes to see
+                your category performance here.
+            </p>
+
+        </div>
+
+    {% endif %}
+
+</section>
+
+     
+<!-- =========================
+     QUIZ ANSWER ANALYTICS
+========================== -->
+
+<section class="features">
+
+    <h2>
+        📝 Quiz Answer Analytics
+    </h2>
+
+    <p>
+        Understand your quiz performance and answer accuracy.
+    </p>
+
+    <div class="feature-grid">
+
+        <div class="feature-card">
+
+            <div class="icon">
+                ✅
+            </div>
+
+            <h3>
+                Correct Answers
+            </h3>
+
+            <p>
+                <strong>
+                    {{ analytics["correct_answers"] }}
+                </strong>
+            </p>
+
+            <progress
+                value="{{ analytics['correct_answers'] }}"
+                max="{{ analytics['total_questions'] }}">
+            </progress>
+
+            <p>
+                Correct responses.
+            </p>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <div class="icon">
+                ❌
+            </div>
+
+            <h3>
+                Incorrect Answers
+            </h3>
+
+            <p>
+                <strong>
+                    {{ analytics["incorrect_answers"] }}
+                </strong>
+            </p>
+
+            <progress
+                value="{{ analytics['incorrect_answers'] }}"
+                max="{{ analytics['total_questions'] }}">
+            </progress>
+
+            <p>
+                Answers that need improvement.
+            </p>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <div class="icon">
+                📊
+            </div>
+
+            <h3>
+                Total Questions
+            </h3>
+
+            <p>
+                <strong>
+                    {{ analytics["total_questions"] }}
+                </strong>
+            </p>
+
+            <p>
+                Questions attempted across quizzes.
+            </p>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <div class="icon">
+                🎯
+            </div>
+
+            <h3>
+                Quiz Accuracy
+            </h3>
+
+            <p>
+                <strong>
+                    {{ analytics["quiz_accuracy"] }}%
+                </strong>
+            </p>
+
+            <progress
+                value="{{ analytics['quiz_accuracy'] }}"
+                max="100">
+            </progress>
+
+            <p>
+                Overall quiz accuracy.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+             
+<!-- =========================
+     MISSION PROGRESS
+========================== -->
+
+<section class="features">
+
+    <h2>
+        🎯 Mission Progress
+    </h2>
+
+    <p>
+        Track your mission completion, experience, and security awareness.
+    </p>
+
+    <div class="feature-grid">
+
+        <div class="feature-card">
+
+            <div class="icon">
+                🎯
+            </div>
+
+            <h3>
+                Missions Completed
+            </h3>
+
+            <p>
+                <strong>
+                    {{ completed_missions }}
+                </strong>
+                /
+                <strong>
+                    {{ total_missions }}
+                </strong>
+            </p>
+
+            <progress
+                value="{{ completed_missions }}"
+                max="{{ total_missions }}">
+            </progress>
+
+            <p>
+                Keep completing missions to improve your practical skills.
+            </p>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <div class="icon">
+                ⭐
+            </div>
+
+            <h3>
+                Experience
+            </h3>
+
+            <p>
+                <strong>
+                    {{ user["xp"] }} XP
+                </strong>
+            </p>
+
+            <p>
+                Earn XP by completing missions and improving your cybersecurity knowledge.
+            </p>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <div class="icon">
+                🛡️
+            </div>
+
+            <h3>
+                Security Awareness
+            </h3>
+
+            <p>
+                <strong>
+                    {{ user["security_score"] }}%
+                </strong>
+            </p>
+
+            <progress
+                value="{{ user['security_score'] }}"
+                max="100">
+            </progress>
+
+            <p>
+                Your current security awareness score.
+            </p>
+
+        </div>
+
+
+        <div class="feature-card">
+
+            <div class="icon">
+                🚀
+            </div>
+
+            <h3>
+                Next Step
+            </h3>
+
+            <p>
+                Continue exploring missions and practice making secure decisions.
+            </p>
+
+            <a href="/missions">
+                <button>
+                    Continue Missions →
+                </button>
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     LEARNING PROGRESS
+========================== -->
+
+<section class="features">
+
+    <h2>
+        📚 Learning Progress
+    </h2>
+
+    <p>
+        Track your progress across cybersecurity learning categories.
+    </p>
+
+    {% if learning_progress %}
+
+        <div class="feature-grid">
+
+            {% for progress in learning_progress %}
+
+                <div class="feature-card">
+
+                    <div class="icon">
+                        📚
+                    </div>
+
+                    <h3>
+                        {{ progress["category"] }}
+                    </h3>
+
+                    <p>
+                        Quiz Score:
+                        <strong>
+                            {{ "%.0f"|format(progress["score"]) }}%
+                        </strong>
+                    </p>
+
+                    <progress
+                        value="{{ progress['score'] }}"
+                        max="100">
+                    </progress>
+
+                    {% if progress["completed"] == 1 %}
+
+                        <p>
+                            ✅ Completed
+                        </p>
+
+                    {% else %}
+
+                        <p>
+                            ⏳ In Progress
+                        </p>
+
+                    {% endif %}
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    {% else %}
+
+        <div class="feature-card">
+
+            <div class="icon">
+                📖
+            </div>
+
+            <h3>
+                Start Learning
+            </h3>
+
+            <p>
+                Complete cybersecurity lessons and quizzes
+                to track your learning progress here.
+            </p>
+
+            <a href="/learn">
+                <button>
+                    Start Learning →
+                </button>
+            </a>
+
+        </div>
+
+    {% endif %}
+
+</section>
+
+          <!-- =========================
+     ACHIEVEMENTS
+========================== -->
+
+<section class="features">
+
+    <h2>
+        🏆 Achievements
+    </h2>
+
+    <p>
+        Milestones you have unlocked through your cybersecurity progress.
+    </p>
+
+    {% if achievements %}
+
+        <div class="feature-grid">
+
+            {% for achievement in achievements %}
+
+                <div class="feature-card">
+
+                    <div class="icon">
+                        🏆
+                    </div>
+
+                    <h3>
+                        {{ achievement["name"] }}
+                    </h3>
+
+                    <p>
+                        {{ achievement["description"] }}
+                    </p>
+
+                    <p>
+                        <strong>
+                            ⭐ +{{ achievement["xp_reward"] }} XP
+                        </strong>
+                    </p>
+
+                    <p>
+                        ✅ Unlocked
+                    </p>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    {% else %}
+
+        <div class="feature-card">
+
+            <div class="icon">
+                🔒
+            </div>
+
+            <h3>
+                No Achievements Yet
+            </h3>
+
+            <p>
+                Complete missions and cybersecurity challenges
+                to unlock achievements and earn bonus XP.
+            </p>
+
+            <a href="/missions">
+                <button>
+                    Explore Missions →
+                </button>
+            </a>
+
+        </div>
+
+    {% endif %}
+
+</section>    
+
+
+<!-- =========================
+     AI SECURITY RISK PREDICTION
+========================== -->
+
+<section class="features">
+
+    <h2>
+        🤖 AI Security Risk Prediction
+    </h2>
+
+    <p>
+        Estimated cybersecurity risk based on your learning,
+        quiz performance, missions, and security awareness.
+    </p>
+
+    <div class="feature-grid">
+
+        <div class="feature-card">
+
+            <div class="icon">
+                🛡️
+            </div>
+
+            <h3>
+                Risk Level: {{ risk_prediction["risk_level"] }}
+            </h3>
+
+            <p>
+                Risk Score:
+                <strong>
+                    {{ risk_prediction["risk_score"] }}/100
+                </strong>
+            </p>
+
+            <progress
+                value="{{ risk_prediction['risk_score'] }}"
+                max="100">
+            </progress>
+
+            <p>
+                {{ risk_prediction["message"] }}
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+       
+<!-- =========================
+     QUICK ACTIONS
+========================== -->
+
+<section class="features">
+
+    <h2>
+        🚀 Quick Actions
+    </h2>
+
+    <p>
+        Continue your cybersecurity training and improve your security skills.
+    </p>
+
+    <div class="feature-grid">
+
+        <div class="feature-card">
+
+            <div class="icon">
+                📚
+            </div>
+
+            <h3>
+                Continue Learning
+            </h3>
+
+            <p>
+                Continue learning cybersecurity topics and improve your knowledge.
+            </p>
+
+            <a href="/learn">
+                <button>
+                    Continue Learning →
+                </button>
+            </a>
+
+        </div>
+
+        <div class="feature-card">
+
+            <div class="icon">
+                🎯
+            </div>
+
+            <h3>
+                Practice Missions
+            </h3>
+
+            <p>
+                Test your decision-making skills through cybersecurity missions.
+            </p>
+
+            <a href="/missions">
+                <button>
+                    Start Mission →
+                </button>
+            </a>
+
+        </div>
+
+        <div class="feature-card">
+
+            <div class="icon">
+                🛡️
+            </div>
+
+            <h3>
+                Improve Security Score
+            </h3>
+
+            <p>
+                Complete quizzes and missions to improve your security awareness.
+            </p>
+
+            <a href="/dashboard">
+                <button>
+                    View Progress →
+                </button>
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<footer>
+
+    <p>
+        CyberSafe Academy • Learn • Practice • Defend
+    </p>
+
+</footer>
+
+</body>
+
+</html>

@@ -1,0 +1,236 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Learn | CyberSafe Academy</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<header class="topbar">
+
+    <div class="logo">
+        CyberSafe Academy
+    </div>
+
+    <nav>
+        <a href="/">Home</a>
+        <a href="{{ url_for('missions') }}">Missions</a>
+        <a href="{{ url_for('learn') }}" class="active">Learn</a>
+        <a href="{{ url_for('dashboard') }}">Progress</a>
+    </nav>
+
+</header>
+
+
+<main class="learn-page">
+
+    <section class="learn-hero">
+
+        <p class="eyebrow">CYBERSAFE ACADEMY</p>
+
+        <h1>Cybersecurity Learning Center</h1>
+
+        <p>
+            Build your cybersecurity knowledge through interactive
+            topics and knowledge-check quizzes.
+        </p>
+
+    </section>
+
+
+    <section class="learning-grid">
+
+
+        <!-- 1 -->
+        <article class="learning-card">
+
+            <span class="card-number">01</span>
+
+            <h2>Cybersecurity Fundamentals</h2>
+
+            <p>
+                Learn the foundations of cybersecurity, common threats,
+                attacks, and essential security practices.
+            </p>
+
+            <a href="{{ url_for('category_quiz', category='fundamentals') }}"
+               class="learn-button">
+                Start Quiz →
+            </a>
+
+        </article>
+
+
+        <!-- 2 -->
+        <article class="learning-card">
+
+            <span class="card-number">02</span>
+
+            <h2>Phishing Awareness</h2>
+
+            <p>
+                Learn how to identify suspicious emails, messages,
+                links, and common phishing attempts.
+            </p>
+
+            <a href="{{ url_for('category_quiz', category='phishing') }}"
+               class="learn-button">
+                Start Quiz →
+            </a>
+
+        </article>
+
+
+        <!-- 3 -->
+        <article class="learning-card">
+
+            <span class="card-number">03</span>
+
+            <h2>Password Security</h2>
+
+            <p>
+                Understand strong passwords, password managers,
+                authentication, and account protection.
+            </p>
+
+            <a href="{{ url_for('category_quiz', category='password') }}"
+               class="learn-button">
+                Start Quiz →
+            </a>
+
+        </article>
+
+
+        <!-- 4 -->
+        <article class="learning-card">
+
+            <span class="card-number">04</span>
+
+            <h2>Malware Awareness</h2>
+
+            <p>
+                Learn about malware, ransomware, suspicious downloads,
+                and ways to reduce infection risks.
+            </p>
+
+            <a href="{{ url_for('category_quiz', category='malware') }}"
+               class="learn-button">
+                Start Quiz →
+            </a>
+
+        </article>
+
+
+        <!-- 5 -->
+        <article class="learning-card">
+
+            <span class="card-number">05</span>
+
+            <h2>Social Engineering</h2>
+
+            <p>
+                Understand how attackers use deception, impersonation,
+                and manipulation to target people.
+            </p>
+
+            <a href="{{ url_for('category_quiz', category='social') }}"
+               class="learn-button">
+                Start Quiz →
+            </a>
+
+        </article>
+
+
+        <!-- 6 -->
+        <article class="learning-card">
+
+            <span class="card-number">06</span>
+
+            <h2>Network Security</h2>
+
+            <p>
+                Learn about network safety, public Wi-Fi,
+                connections, and common network security risks.
+            </p>
+
+            <a href="{{ url_for('category_quiz', category='network') }}"
+               class="learn-button">
+                Start Quiz →
+            </a>
+
+        </article>
+
+
+        <!-- 7 -->
+        <article class="learning-card">
+
+            <span class="card-number">07</span>
+
+            <h2>Web Security</h2>
+
+            <p>
+                Learn how to recognize unsafe websites, suspicious
+                links, and common web security risks.
+            </p>
+
+            <a href="{{ url_for('category_quiz', category='web') }}"
+               class="learn-button">
+                Start Quiz →
+            </a>
+
+        </article>
+
+
+        <!-- 8 -->
+        <article class="learning-card">
+
+            <span class="card-number">08</span>
+
+            <h2>Encryption & Hashing</h2>
+
+            <p>
+                Learn how encryption and hashing protect information,
+                passwords, and sensitive data.
+            </p>
+
+            <a href="{{ url_for('category_quiz', category='encryption') }}"
+               class="learn-button">
+                Start Quiz →
+            </a>
+
+        </article>
+
+
+       <!-- 9 -->
+<article class="learning-card">
+
+    <span class="card-number">09</span>
+
+    <h2>OTP & Account Scams</h2>
+
+    <p>
+        Learn how to recognize OTP scams, account takeover
+        attempts, fake support calls, and suspicious activity.
+    </p>
+
+    <a href="{{ url_for('category_quiz', category='otp') }}"
+       class="learn-button">
+        Start Quiz →
+    </a>
+
+</article>
+
+</section>
+
+</main>
+
+</body>
+</html>

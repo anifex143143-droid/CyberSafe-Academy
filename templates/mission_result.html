@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mission Result | CyberSafe Academy</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<header>
+    <div class="logo">🛡️ CyberSafe Academy</div>
+
+    <nav>
+        <a href="/">Home</a>
+        <a href="/missions">Missions</a>
+    </nav>
+</header>
+
+<main class="hero">
+
+    {% if result == "correct" %}
+
+        <p class="eyebrow">MISSION COMPLETE</p>
+
+        <h1>✅ Excellent Decision</h1>
+
+        <p>
+            You correctly identified the safer response.
+        </p>
+
+        <div class="feature-card">
+
+            <h2>Security Insight</h2>
+
+            <p>
+                Unexpected account requests and urgency are
+                common warning signs. Verify requests through
+                a trusted official channel instead of following
+                links or instructions from suspicious messages.
+            </p>
+
+            <h2>🎮 Reward</h2>
+
+            <p>
+                <strong>+{{ mission["xp_reward"] }} XP</strong>
+            </p>
+
+        </div>
+
+    {% else %}
+
+        <p class="eyebrow">MISSION REVIEW</p>
+
+        <h1>⚠️ Risky Decision</h1>
+
+        <p>
+            Your decision could expose an account to unnecessary risk.
+        </p>
+
+        <div class="feature-card">
+
+            <h2>Security Insight</h2>
+
+            <p>
+                Don't let urgency pressure you into acting immediately.
+                Verify unexpected requests using a trusted,
+                independently accessed official channel.
+            </p>
+
+            <h2>🎮 Reward</h2>
+
+            <p>
+                <strong>+0 XP</strong>
+            </p>
+
+        </div>
+
+    {% endif %}
+
+    <div class="feature-card">
+
+        <h2>📊 Your Progress</h2>
+
+        <p>
+            <strong>Total XP:</strong>
+            {{ user["xp"] }}
+        </p>
+
+        <p>
+            <strong>Level:</strong>
+            {{ user["level"] }}
+        </p>
+
+    </div>
+
+    <p>
+        <a href="/missions">
+            ← Back to Mission Center
+        </a>
+    </p>
+
+</main>
+
+</body>
+</html>

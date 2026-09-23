@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<title>CyberSafe Academy</title>
+
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}">
+
+
+</head>
+
+<body>
+
+
+<header>
+
+    <div class="logo">
+        🛡️ CyberSafe Academy
+    </div>
+
+    <nav>
+        <a href="/">Home</a>
+        <a href="/missions">Missions</a>
+        <a href="/dashboard">Progress</a>
+    </nav>
+
+</header>
+
+
+<main>
+
+    <section class="hero">
+
+        <div class="hero-text">
+
+            <p class="tag">
+                CYBERSECURITY TRAINING PLATFORM
+            </p>
+
+            <h1>
+                Learn Cybersecurity.
+                <br>
+                <span>Experience It.</span>
+            </h1>
+
+            <p class="description">
+                Learn, investigate, practice and improve your
+                cybersecurity skills through interactive missions
+                and safe simulations.
+            </p>
+
+            <a href="/missions">
+                <button>
+                   🎯 Explore Mission Center
+                </button>
+            </a>
+
+        </div>
+
+
+        <div class="shield">
+            🛡️
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         LIVE PLAYER STATS
+    ========================== -->
+
+    <section class="stats">
+
+        <div class="card">
+
+            <h3>
+                XP
+            </h3>
+
+            <p>
+                {{ user["xp"] }}
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>
+                Missions
+            </h3>
+
+            <p>
+                {{ completed_missions }} / {{ total_missions }}
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>
+                Security Score
+            </h3>
+
+            <p>
+                {{ user["security_score"] }}%
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>
+                Level
+            </h3>
+
+            <p>
+                {{ user["level"] }}
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         CYBER JOURNEY
+    ========================== -->
+
+    <section class="features">
+
+        <h2>
+            Your Cyber Journey
+        </h2>
+
+        <div class="feature-grid">
+
+            <div class="feature">
+
+                <div class="icon">
+                    🎯
+                </div>
+
+                <h3>
+                    Mission Center
+                </h3>
+
+                <p>
+                    Solve realistic cybersecurity scenarios
+                    and make decisions.
+                </p>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="icon">
+                    🧪
+                </div>
+
+                <h3>
+                    Security Labs
+                </h3>
+
+                <p>
+                    Experiment with safe cybersecurity
+                    concepts interactively.
+                </p>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="icon">
+                    🤖
+                </div>
+
+                <h3>
+                    AI Cyber Mentor
+                </h3>
+
+                <p>
+                    Get personalized feedback based on
+                    your performance.
+                </p>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="icon">
+                    📊
+                </div>
+
+                <h3>
+                    Security Analytics
+                </h3>
+
+                <p>
+                    Track your skills, progress, XP and
+                    security awareness.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<footer>
+
+    <p>
+        CyberSafe Academy • Learn • Practice • Defend
+    </p>
+
+</footer>
+
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+
+</body>
+
+</html>
