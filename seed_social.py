@@ -50,10 +50,33 @@ questions = [
     )
 ]
 
+
+
 for question in questions:
+
+    existing = connection.execute("""
+        SELECT id
+        FROM quiz_questions
+        WHERE category = ?
+        AND question_text = ?
+    """, (
+        question[0],
+        question[1]
+    )).fetchone()
+
+    if existing:
+        continue
+
     connection.execute("""
-        INSERT INTO quiz_questions
-        (category, question_text, option_a, option_b, option_c, option_d, correct_option)
+        INSERT INTO quiz_questions (
+            category,
+            question_text,
+            option_a,
+            option_b,
+            option_c,
+            option_d,
+            correct_option
+        )
         VALUES (?, ?, ?, ?, ?, ?, ?)
     """, question)
 

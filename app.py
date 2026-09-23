@@ -2,6 +2,8 @@ from flask import Flask, render_template, request, redirect, url_for
 from data.database import initialize_database, get_connection
 import joblib
 import pandas as pd
+from pathlib import Path
+from ml.risk_model import train_model
 
 app = Flask(__name__)
 
@@ -264,14 +266,16 @@ def predict_security_risk(connection, user_id):
         )
 
 
-    # =========================
+        # =========================
     # ML RISK PREDICTION
     # =========================
 
-    model = joblib.load(
-        "ml/risk_model.pkl"
-    )
+    model_path = Path(__file__).resolve().parent / "ml" / "risk_model.pkl"
 
+    if not model_path.exists():
+        train_model()
+
+    model = joblib.load(model_path)
     input_data = pd.DataFrame([{
         "security_score": security_score,
         "quiz_accuracy": quiz_accuracy,
@@ -1638,7 +1642,6 @@ def category_quiz(category):
         quiz_category=quiz_category,
         category=category
     )
-
 
 if __name__ == "__main__":
     app.run()

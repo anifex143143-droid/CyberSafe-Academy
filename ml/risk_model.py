@@ -1,6 +1,7 @@
 import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
 import joblib
+from pathlib import Path
 
 
 # Training data
@@ -77,16 +78,25 @@ model = RandomForestClassifier(
     random_state=42
 )
 
-
 # Train model
-model.fit(X, y)
+def train_model():
+    model = RandomForestClassifier(
+        n_estimators=100,
+        random_state=42
+    )
+
+    model.fit(X, y)
+
+    model_path = Path(__file__).resolve().parent / "risk_model.pkl"
+
+    joblib.dump(
+        model,
+        model_path
+    )
+
+    return model
 
 
-# Save trained model
-joblib.dump(
-    model,
-    "ml/risk_model.pkl"
-)
-
+model = train_model()
 
 print("ML risk prediction model trained successfully.")
